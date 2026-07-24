@@ -41,6 +41,81 @@ public class OrderServiceQueryTests
     }
 
     [Fact]
+    public async Task GetOrders_FirstPageStartsWithNewestOrder()
+    {
+        using var db = TestSetup.CreateContext();
+        var service = TestSetup.CreateOrderService(db);
+        var customer = TestSetup.AddCustomer(db);
+        var now = DateTime.UtcNow;
+        var newest = new Order { CustomerId = customer.Id, Status = OrderStatus.Pending, CreatedAt = now };
+
+        db.Orders.Add(newest);
+        for (var i = 1; i <= 25; i++)
+            db.Orders.Add(new Order { CustomerId = customer.Id, Status = OrderStatus.Confirmed, CreatedAt = now.AddMinutes(-i) });
+        db.SaveChanges();
+
+        var result = await service.GetOrdersAsync(1, 20, null);
+
+        Assert.Equal(newest.Id, result.Items.First().Id);
+        Assert.Contains(result.Items, o => o.Id == newest.Id);
+    }
+
+    [Fact]
+    public async Task GetOrders_PaginatesWithoutSkippingOrOverlappingItems()
+    {
+        using var db = TestSetup.CreateContext();
+        var service = TestSetup.CreateOrderService(db);
+        var customer = TestSetup.AddCustomer(db);
+        var now = DateTime.UtcNow;
+        var expectedOrderIds = new List<int>();
+
+        for (var i = 0; i < 25; i++)
+        {
+            var order = new Order { CustomerId = customer.Id, Status = OrderStatus.Confirmed, CreatedAt = now.AddMinutes(-i) };
+            db.Orders.Add(order);
+            expectedOrderIds.Add(order.Id);
+        }
+        db.SaveChanges();
+
+        expectedOrderIds = db.Orders
+            .OrderByDescending(o => o.CreatedAt)
+            .ThenByDescending(o => o.Id)
+            .Select(o => o.Id)
+            .ToList();
+
+        var firstPage = await service.GetOrdersAsync(1, 20, null);
+        var secondPage = await service.GetOrdersAsync(2, 20, null);
+
+        Assert.Equal(20, firstPage.Items.Count);
+        Assert.Equal(5, secondPage.Items.Count);
+        Assert.Empty(firstPage.Items.Select(o => o.Id).Intersect(secondPage.Items.Select(o => o.Id)));
+        Assert.Equal(expectedOrderIds.Take(20), firstPage.Items.Select(o => o.Id));
+        Assert.Equal(expectedOrderIds.Skip(20), secondPage.Items.Select(o => o.Id));
+    }
+
+    [Fact]
+    public async Task GetOrders_OrdersSameCreatedAtByNewestId()
+    {
+        using var db = TestSetup.CreateContext();
+        var service = TestSetup.CreateOrderService(db);
+        var customer = TestSetup.AddCustomer(db);
+        var createdAt = DateTime.UtcNow;
+
+        for (var i = 0; i < 3; i++)
+            db.Orders.Add(new Order { CustomerId = customer.Id, Status = OrderStatus.Confirmed, CreatedAt = createdAt });
+        db.SaveChanges();
+
+        var expectedIds = db.Orders
+            .Select(o => o.Id)
+            .OrderByDescending(id => id)
+            .ToList();
+
+        var result = await service.GetOrdersAsync(1, 20, null);
+
+        Assert.Equal(expectedIds, result.Items.Select(o => o.Id));
+    }
+
+    [Fact]
     public async Task GetCustomerOrders_ReturnsOnlyThatCustomersOrders()
     {
         using var db = TestSetup.CreateContext();
