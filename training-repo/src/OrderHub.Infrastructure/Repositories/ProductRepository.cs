@@ -20,6 +20,27 @@ public class ProductRepository : IProductRepository
     public async Task<IReadOnlyList<Product>> GetActiveAsync() =>
         await _db.Products.Where(p => p.IsActive).OrderBy(p => p.Sku).ToListAsync();
 
+    public async Task<IReadOnlyList<LowStockProductReport>> GetLowStockAsync(int threshold, DateTime since) =>
+        await _db.Products
+            .Where(p => p.StockQuantity <= threshold)
+            .Select(p => new LowStockProductReport
+            {
+                ProductId = p.Id,
+                Sku = p.Sku,
+                Name = p.Name,
+                StockQuantity = p.StockQuantity,
+                IsActive = p.IsActive,
+                SoldQuantityLast30Days = _db.Set<OrderItem>()
+                    .Where(i => i.ProductId == p.Id &&
+                        i.Order != null &&
+                        i.Order.CreatedAt >= since &&
+                        i.Order.Status != OrderStatus.Cancelled)
+                    .Sum(i => (int?)i.Quantity) ?? 0
+            })
+            .OrderBy(p => p.StockQuantity)
+            .ThenBy(p => p.Sku)
+            .ToListAsync();
+
     public Task<Product?> GetByIdAsync(int id) =>
         _db.Products.FirstOrDefaultAsync(p => p.Id == id);
 
