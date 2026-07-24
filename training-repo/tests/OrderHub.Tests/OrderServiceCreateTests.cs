@@ -37,6 +37,21 @@ public class OrderServiceCreateTests
     }
 
     [Fact]
+    public async Task CreateOrder_GoldCustomerSnapshotsOriginalUnitPriceAndDiscountsTotalOnce()
+    {
+        using var db = TestSetup.CreateContext();
+        var service = TestSetup.CreateOrderService(db);
+        var customer = TestSetup.AddCustomer(db, tier: CustomerTier.Gold);
+        var product = TestSetup.AddProduct(db, unitPrice: 100m);
+
+        var result = await service.CreateOrderAsync(customer.Id, new[] { new NewOrderLine(product.Id, 2) });
+
+        Assert.True(result.Success);
+        Assert.Equal(100m, result.Value!.Items.Single().UnitPriceSnapshot);
+        Assert.Equal(180m, service.CalculateTotal(result.Value));
+    }
+
+    [Fact]
     public async Task CreateOrder_DecrementsProductStock()
     {
         using var db = TestSetup.CreateContext();
