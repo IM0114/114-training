@@ -35,7 +35,7 @@
         }
         @foreach (var product in Model.Products)
         {
-            <tr>
+            <tr class="@(product.IsCriticalStock ? "table-danger" : null)">
                 <td>@product.Sku</td>
                 <td>@product.Name</td>
                 <td class="text-end">@product.StockQuantity</td>

@@ -7,4 +7,5 @@ public class LowStockProductRowViewModel
     public int StockQuantity { get; set; }
     public int SoldQuantityLast30Days { get; set; }
     public bool IsActive { get; set; }
+    public bool IsCriticalStock => StockQuantity < 5;
 }

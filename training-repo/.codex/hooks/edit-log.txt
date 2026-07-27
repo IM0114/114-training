@@ -25,3 +25,7 @@
 2026-07-24 17:43:18  apply_patch  src/OrderHub.Web/Views/Products/LowStock.cshtml
 2026-07-24 17:54:54  apply_patch  src/OrderHub.Web/Views/Products/LowStock.cshtml
 2026-07-24 18:20:30  apply_patch  src/OrderHub.Web/Views/Shared/_Layout.cshtml
+2026-07-27 09:06:16  apply_patch  src/OrderHub.Web/ViewModels/LowStockProductRowViewModel.cs
+2026-07-27 09:06:16  apply_patch  src/OrderHub.Web/Views/Products/LowStock.cshtml
+2026-07-27 09:06:16  apply_patch  tests/OrderHub.Tests/LowStockProductRowViewModelTests.cs
+2026-07-27 09:06:16  apply_patch  tests/OrderHub.Tests/OrderHub.Tests.csproj
