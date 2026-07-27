@@ -22,7 +22,7 @@ public class ProductRepository : IProductRepository
 
     public async Task<IReadOnlyList<LowStockProductReport>> GetLowStockAsync(int threshold, DateTime since) =>
         await _db.Products
-            .Where(p => p.StockQuantity <= threshold)
+            .Where(p => p.IsActive && p.StockQuantity < threshold)
             .Select(p => new LowStockProductReport
             {
                 ProductId = p.Id,

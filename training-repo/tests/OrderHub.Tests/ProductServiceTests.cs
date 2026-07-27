@@ -32,7 +32,7 @@ public class ProductServiceTests
     }
 
     [Fact]
-    public async Task GetLowStock_UsesThreshold_ReturnsOnlyProductsAtOrBelowThreshold()
+    public async Task GetLowStock_UsesThreshold_ReturnsOnlyProductsBelowThreshold()
     {
         using var db = TestSetup.CreateContext();
         var service = TestSetup.CreateProductService(db);
@@ -42,7 +42,35 @@ public class ProductServiceTests
 
         var products = await service.GetLowStockAsync(10);
 
-        Assert.Equal(new[] { "SKU-EDGE", "SKU-LOW" }, products.Select(p => p.Sku).OrderBy(s => s));
+        Assert.Equal(new[] { "SKU-LOW" }, products.Select(p => p.Sku));
+    }
+
+    [Fact]
+    public async Task GetLowStock_ExcludesInactiveProducts()
+    {
+        using var db = TestSetup.CreateContext();
+        var service = TestSetup.CreateProductService(db);
+        TestSetup.AddProduct(db, sku: "SKU-ACTIVE", stock: 3);
+        TestSetup.AddProduct(db, sku: "SKU-INACTIVE", stock: 3, isActive: false);
+
+        var products = await service.GetLowStockAsync(10);
+
+        Assert.Equal(new[] { "SKU-ACTIVE" }, products.Select(p => p.Sku));
+        Assert.All(products, p => Assert.True(p.IsActive));
+    }
+
+    [Fact]
+    public async Task GetLowStock_ReturnsProductsOrderedByStockQuantity()
+    {
+        using var db = TestSetup.CreateContext();
+        var service = TestSetup.CreateProductService(db);
+        TestSetup.AddProduct(db, sku: "SKU-SEVEN", stock: 7);
+        TestSetup.AddProduct(db, sku: "SKU-TWO", stock: 2);
+        TestSetup.AddProduct(db, sku: "SKU-FIVE", stock: 5);
+
+        var products = await service.GetLowStockAsync(10);
+
+        Assert.Equal(new[] { "SKU-TWO", "SKU-FIVE", "SKU-SEVEN" }, products.Select(p => p.Sku));
     }
 
     [Fact]
