@@ -1,0 +1,121 @@
+- generic [ref=e2]:
+  - generic [ref=e3]:
+    - generic [ref=e4]:
+      - heading "MCP Inspector v0.14.0" [level=1] [ref=e7]
+      - generic [ref=e9]:
+        - generic [ref=e10]:
+          - text: Transport Type
+          - combobox "Transport Type" [ref=e11] [cursor=pointer]:
+            - generic: STDIO
+            - img [ref=e12]
+        - generic [ref=e14]:
+          - text: Command
+          - textbox "Command" [ref=e15]: dotnet
+        - generic [ref=e16]:
+          - text: Arguments
+          - textbox "Arguments" [ref=e17]:
+            - /placeholder: Arguments (space-separated)
+            - text: src/OrderHub.Mcp/bin/Debug/net8.0/OrderHub.Mcp.dll
+        - button "Environment Variables" [ref=e19] [cursor=pointer]:
+          - img [ref=e20]
+          - text: Environment Variables
+        - generic [ref=e22]:
+          - button "Server Entry" [ref=e23] [cursor=pointer]:
+            - img [ref=e24]
+            - text: Server Entry
+          - button "Servers File" [ref=e27] [cursor=pointer]:
+            - img [ref=e28]
+            - text: Servers File
+        - button "Configuration" [ref=e32] [cursor=pointer]:
+          - img [ref=e33]
+          - img [ref=e35]
+          - text: Configuration
+        - generic [ref=e38]:
+          - generic [ref=e100]:
+            - button "Restart" [ref=e101] [cursor=pointer]:
+              - img [ref=e102]
+              - text: Restart
+            - button "Disconnect" [ref=e105] [cursor=pointer]:
+              - img [ref=e106]
+              - text: Disconnect
+          - generic [ref=e44]: Connected
+          - generic [ref=e114]:
+            - text: Logging Level
+            - combobox "Logging Level" [ref=e115] [cursor=pointer]:
+              - generic: debug
+              - img [ref=e116]
+          - generic [ref=e87]:
+            - generic [ref=e88]:
+              - heading "Error output from MCP server" [level=3] [ref=e89]
+              - button "Clear" [ref=e90] [cursor=pointer]
+            - generic [ref=e91]:
+              - generic [ref=e93]: ����ʧ�ܡ����޸����ɴ����������С�
+              - generic [ref=e95]: ����ʧ�ܡ����޸����ɴ����������С�
+              - generic [ref=e98]: ����ʧ�ܡ����޸����ɴ����������С�
+              - generic [ref=e118]: "info: ModelContextProtocol.Server.StdioServerTransport[857250842] Server (stream) (OrderHub.Mcp) transport reading messages."
+              - generic [ref=e119]: "info: Microsoft.Hosting.Lifetime[0] Application started. Press Ctrl+C to shut down."
+              - generic [ref=e120]: "info: Microsoft.Hosting.Lifetime[0] Hosting environment: Production info: Microsoft.Hosting.Lifetime[0] Content root path: D:\\OB\\114-Training\\training-repo"
+              - generic [ref=e121]: "info: ModelContextProtocol.Server.McpServer[570385771] Server (OrderHub.Mcp 1.0.0.0) method 'initialize' request handler called."
+              - generic [ref=e122]: "info: ModelContextProtocol.Server.McpServer[1867955179] Server (OrderHub.Mcp 1.0.0.0), Client (mcp-inspector 0.14.0) method 'initialize' request handler completed in 41.1485ms."
+      - generic [ref=e46]:
+        - combobox [ref=e47] [cursor=pointer]:
+          - generic: Dark
+          - img [ref=e48]
+        - generic [ref=e50]:
+          - link "Inspector Documentation" [ref=e51] [cursor=pointer]:
+            - /url: https://modelcontextprotocol.io/docs/tools/inspector
+            - img [ref=e52]
+          - link "Debugging Guide" [ref=e55] [cursor=pointer]:
+            - /url: https://modelcontextprotocol.io/docs/tools/debugging
+            - img [ref=e56]
+          - link "Report bugs or contribute on GitHub" [ref=e65] [cursor=pointer]:
+            - /url: https://github.com/modelcontextprotocol/inspector
+            - img [ref=e66]
+    - generic [ref=e69]:
+      - generic [ref=e123]:
+        - tablist [ref=e124]:
+          - tab "Resources" [disabled]:
+            - img
+            - text: Resources
+          - tab "Prompts" [disabled]:
+            - img
+            - text: Prompts
+          - tab "Tools" [selected] [ref=e125] [cursor=pointer]:
+            - img [ref=e126]
+            - text: Tools
+          - tab "Ping" [ref=e130] [cursor=pointer]:
+            - img [ref=e131]
+            - text: Ping
+          - tab "Sampling" [ref=e134] [cursor=pointer]:
+            - img [ref=e135]
+            - text: Sampling
+          - tab "Roots" [ref=e138] [cursor=pointer]:
+            - img [ref=e139]
+            - text: Roots
+          - tab "Auth" [ref=e144] [cursor=pointer]:
+            - img [ref=e145]
+            - text: Auth
+        - tabpanel "Tools" [ref=e150]:
+          - generic [ref=e151]:
+            - generic [ref=e152]:
+              - heading "Tools" [level=3] [ref=e154]
+              - generic [ref=e155]:
+                - button "List Tools" [ref=e156] [cursor=pointer]
+                - button "Clear" [disabled]
+            - generic [ref=e157]:
+              - heading "Select a tool" [level=3] [ref=e159]
+              - alert [ref=e161]:
+                - generic [ref=e162]: Select a tool from the list to view its details and run it
+      - generic [ref=e80]:
+        - generic [ref=e81]:
+          - heading "History" [level=2] [ref=e82]
+          - list [ref=e163]:
+            - listitem [ref=e164]:
+              - generic [ref=e165] [cursor=pointer]:
+                - generic [ref=e166]: 1. initialize
+                - generic [ref=e167]: ▶
+        - generic [ref=e84]:
+          - heading "Server Notifications" [level=2] [ref=e85]
+          - paragraph [ref=e86]: No notifications yet
+  - region "Notifications (F8)":
+    - list

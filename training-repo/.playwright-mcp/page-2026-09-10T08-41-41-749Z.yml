@@ -1,0 +1,69 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - navigation [ref=e3]:
+      - generic [ref=e4]:
+        - link "OrderHub" [ref=e5] [cursor=pointer]:
+          - /url: /Orders
+        - list [ref=e7]:
+          - listitem [ref=e8]:
+            - link "訂單" [ref=e9] [cursor=pointer]:
+              - /url: /Orders
+          - listitem [ref=e10]:
+            - link "商品" [ref=e11] [cursor=pointer]:
+              - /url: /Products
+          - listitem [ref=e12]:
+            - link "低庫存警示" [ref=e13] [cursor=pointer]:
+              - /url: /Products/LowStock
+          - listitem [ref=e14]:
+            - link "客戶" [ref=e15] [cursor=pointer]:
+              - /url: /Customers
+  - main [ref=e17]:
+    - generic [ref=e18]:
+      - 'heading "訂單 #205 待處理" [level=1] [ref=e19]':
+        - text: "訂單 #205"
+        - generic [ref=e20]: 待處理
+      - link "回訂單列表" [ref=e21] [cursor=pointer]:
+        - /url: /Orders
+    - generic [ref=e22]:
+      - generic [ref=e23]: 客戶資訊
+      - generic [ref=e24]:
+        - generic [ref=e25]:
+          - generic [ref=e26]:
+            - strong [ref=e27]: 王美玲
+            - generic [ref=e28]: 銀卡會員
+          - generic [ref=e29]: wang.meiling@example.com.tw
+          - generic [ref=e30]: 建立時間：2026-09-08 17:35
+        - link "查看此客戶的所有訂單" [ref=e32] [cursor=pointer]:
+          - /url: /Customers/6/Orders
+    - generic [ref=e33]:
+      - generic [ref=e34]: 訂單明細
+      - table [ref=e35]:
+        - rowgroup [ref=e36]:
+          - row "SKU 商品 數量 單價（快照） 小計" [ref=e37]:
+            - columnheader "SKU" [ref=e38]
+            - columnheader "商品" [ref=e39]
+            - columnheader "數量" [ref=e40]
+            - columnheader "單價（快照）" [ref=e41]
+            - columnheader "小計" [ref=e42]
+        - rowgroup [ref=e43]:
+          - row "SKU-1001 極光 無線滑鼠 1 NT$ 1,420.00 NT$ 1,420.00" [ref=e44]:
+            - cell "SKU-1001" [ref=e45]
+            - cell "極光 無線滑鼠" [ref=e46]
+            - cell "1" [ref=e47]
+            - cell "NT$ 1,420.00" [ref=e48]
+            - cell "NT$ 1,420.00" [ref=e49]
+        - rowgroup [ref=e50]:
+          - row "小計 NT$ 1,420.00" [ref=e51]:
+            - cell "小計" [ref=e52]
+            - cell "NT$ 1,420.00" [ref=e53]
+          - row "會員折扣（5%） -NT$ 71.00" [ref=e54]:
+            - cell "會員折扣（5%）" [ref=e55]
+            - cell "-NT$ 71.00" [ref=e56]
+          - row "應付總額 NT$ 1,349.00" [ref=e57]:
+            - cell "應付總額" [ref=e58]:
+              - strong [ref=e59]: 應付總額
+            - cell "NT$ 1,349.00" [ref=e60]:
+              - strong [ref=e61]: NT$ 1,349.00
+    - button "取消訂單" [ref=e63] [cursor=pointer]
+  - contentinfo [ref=e64]:
+    - generic [ref=e65]: © 2026 - OrderHub 訂單管理系統（內部訓練用）
