@@ -1,0 +1,72 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - navigation [ref=e3]:
+      - generic [ref=e4]:
+        - link "OrderHub" [ref=e5] [cursor=pointer]:
+          - /url: /Orders
+        - list [ref=e7]:
+          - listitem [ref=e8]:
+            - link "訂單" [ref=e9] [cursor=pointer]:
+              - /url: /Orders
+          - listitem [ref=e10]:
+            - link "商品" [ref=e11] [cursor=pointer]:
+              - /url: /Products
+          - listitem [ref=e12]:
+            - link "低庫存警示" [ref=e13] [cursor=pointer]:
+              - /url: /Products/LowStock
+          - listitem [ref=e14]:
+            - link "客戶" [ref=e15] [cursor=pointer]:
+              - /url: /Customers
+  - main [ref=e17]:
+    - heading "低庫存警示" [level=1] [ref=e18]
+    - generic [ref=e19]:
+      - generic [ref=e20]:
+        - generic [ref=e21]: 庫存門檻
+        - spinbutton "庫存門檻" [ref=e22]: "5"
+      - button "查詢" [ref=e24] [cursor=pointer]
+    - table [ref=e25]:
+      - rowgroup [ref=e26]:
+        - row "商品編號 名稱 目前庫存 近 30 天售出 狀態" [ref=e27]:
+          - columnheader "商品編號" [ref=e28]
+          - columnheader "名稱" [ref=e29]
+          - columnheader "目前庫存" [ref=e30]
+          - columnheader "近 30 天售出" [ref=e31]
+          - columnheader "狀態" [ref=e32]
+      - rowgroup [ref=e33]:
+        - row "SKU-1048 晨光 行動電源 2 0 販售中" [ref=e34]:
+          - cell "SKU-1048" [ref=e35]
+          - cell "晨光 行動電源" [ref=e36]
+          - cell "2" [ref=e37]
+          - cell "0" [ref=e38]
+          - cell "販售中" [ref=e39]:
+            - generic [ref=e40]: 販售中
+        - row "SKU-1005 極光 筆電支架 3 0 販售中" [ref=e41]:
+          - cell "SKU-1005" [ref=e42]
+          - cell "極光 筆電支架" [ref=e43]
+          - cell "3" [ref=e44]
+          - cell "0" [ref=e45]
+          - cell "販售中" [ref=e46]:
+            - generic [ref=e47]: 販售中
+        - row "SKU-1023 雲峰 27吋螢幕 3 0 販售中" [ref=e48]:
+          - cell "SKU-1023" [ref=e49]
+          - cell "雲峰 27吋螢幕" [ref=e50]
+          - cell "3" [ref=e51]
+          - cell "0" [ref=e52]
+          - cell "販售中" [ref=e53]:
+            - generic [ref=e54]: 販售中
+        - row "SKU-1014 星河 USB-C 集線器 4 0 販售中" [ref=e55]:
+          - cell "SKU-1014" [ref=e56]
+          - cell "星河 USB-C 集線器" [ref=e57]
+          - cell "4" [ref=e58]
+          - cell "0" [ref=e59]
+          - cell "販售中" [ref=e60]:
+            - generic [ref=e61]: 販售中
+        - row "SKU-1032 曜石 機械鍵盤 4 0 販售中" [ref=e62]:
+          - cell "SKU-1032" [ref=e63]
+          - cell "曜石 機械鍵盤" [ref=e64]
+          - cell "4" [ref=e65]
+          - cell "0" [ref=e66]
+          - cell "販售中" [ref=e67]:
+            - generic [ref=e68]: 販售中
+  - contentinfo [ref=e69]:
+    - generic [ref=e70]: © 2026 - OrderHub 訂單管理系統（內部訓練用）

@@ -4,3 +4,7 @@ config_file = ".codex/hooks.json"
 [mcp_servers.playwright]
 command = "npx"
 args = ["-y", "@playwright/mcp@0.0.77"]
+
+[mcp_servers.orderhub]
+command = "dotnet"
+args = ["run", "--project", "src/OrderHub.Mcp"]
