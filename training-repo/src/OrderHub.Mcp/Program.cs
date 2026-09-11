@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -26,6 +26,8 @@ builder.Services.AddScoped<IOrderService, OrderService>();
 builder.Services
     .AddMcpServer()
     .WithStdioServerTransport()
-    .WithTools<OrderHubTools>();
+    .WithTools<OrderHubTools>()
+    .WithResources<OrderHubResources>()
+    .WithPrompts<OrderHubPrompts>();
 
 await builder.Build().RunAsync();

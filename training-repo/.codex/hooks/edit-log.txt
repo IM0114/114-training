@@ -32,3 +32,4 @@
 2026-07-27 10:31:46  apply_patch  src/OrderHub.Infrastructure/Repositories/ProductRepository.cs
 2026-07-27 10:31:46  apply_patch  tests/OrderHub.Tests/ProductServiceTests.cs
 2026-07-27 10:32:53  apply_patch  tests/OrderHub.Tests/ProductServiceTests.cs
+2026-09-11 15:05:23  apply_patch  D:\OB\114-Training\training-repo\src\OrderHub.Mcp\Program.cs

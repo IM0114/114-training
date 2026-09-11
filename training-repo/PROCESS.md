@@ -132,6 +132,65 @@
 3. 我有在 code review 的角度看過 diff（不是 agent 說好就好）
 	- 是
 
+### 第二階段 — 自建 MCP Server
+
+練習 2
+
+1. 三個工具都列得出來,且 description、參數說明如你所寫
+	- 是
+
+2. 手動呼叫 LowStock(threshold=10),回傳的商品和 /Products 頁面上的低庫存商品一致
+	- 是
+
+3. 呼叫 GetOrder 用一個不存在的 Id,回應是清楚的錯誤訊息而不是 exception dump
+	- 是, 回應 "找不到訂單 0"
+
+練習 3
+
+1. Codex:把 config.toml 的 [mcp_servers.orderhub] 區塊註解掉後重啟),問 agent:「哪些商品庫存低於 5?」——觀察它得寫程式或查 DB 繞多遠
+	- 耗時：8 ~ 10 秒， 
+	- 操作：agent 會打開頁面呼叫 http://localhost:5150/Products/LowStock?Threshold=5 再回報
+
+2. 開啟 MCP,同一個問題再問一次——應該一次工具呼叫就答完
+	- 耗時：6.7833 秒
+	- 操作：agent 先確認 orderhub MCP tools 是否已載入，看到 low_stock 後直接呼叫 low_stock(threshold: 5)，沒有走瀏覽器
+
+練習 4
+
+1. MCP Inspector 中 cancel_order 的 annotations 如你所標(destructiveHint 等),三個唯讀工具則顯示 read-only
+	- cancel_order：destructiveHint: true, idempotentHint: false
+	- get_order：readOnlyHint: true
+	- low_stock：readOnlyHint: true
+	- customer_orders：readOnlyHint: true
+
+2. 對 agent 說「幫我取消訂單 X」:觀察權限確認提示——你按允許之前,資料不會被動到
+	- 是的
+
+3. 取消一筆待處理訂單成功,回 /Products 頁面確認庫存有回補(就是活動 1 客訴 3 修好的行為)
+	- 是
+
+4. 對同一筆訂單再取消一次、或挑一筆已出貨訂單取消:得到清楚的拒絕訊息而非 exception dump
+	- 是，結果顯示 "取消失敗:狀態為 Cancelled 的訂單不可取消"
+
+練習 5
+
+1. MCP Inspector:Resources 分頁讀得到 orderhub://discount-rules;Prompts 分頁能帶 threshold 參數取得展開後的訊息
+	- 能讀到 + 能帶 threshold 參數
+
+2. Codex 用戶:Inspector 讀出 resource 內容貼進對話,問同一題
+	- Gold: 9 折
+	  所以：
+	  1000 × 0.9 = 900
+	  Gold 會員買 1000 元商品應付 900 元。
+
+3. Resource vs 讓 agent 自己讀 OrderService.cs：差在哪？
+	- Resource: 整理給 agent 使用的背景知識，內容短、語意明確，agent 不需要先理解整個程式流程，但需要與代碼同步更新
+	- 讓 agent 自己讀 `OrderService.cs`: agent 需要從程式代碼中推論規則，成本較高，較耗時
+
+4. Prompt 放在 MCP server 裡 vs 每個人自己手打一段提示：差在哪？
+	- Prompt 放在 MCP server：團隊共用同一套流程，高一致性
+	- 每個人自己手打一段提示：格式、查詢條件、判斷標準都可能不同，結果也比較難重現
+
 ---
 
 ## 附錄：值得留下的對話片段
