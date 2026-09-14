@@ -1,0 +1,86 @@
+- generic:
+  - generic:
+    - generic:
+      - generic:
+        - generic:
+          - generic:
+            - heading [level=1]: MCP Inspector v0.14.0
+        - generic:
+          - generic:
+            - generic:
+              - text: Transport Type
+              - combobox [expanded]:
+                - generic: STDIO
+                - img
+            - generic:
+              - text: Command
+              - textbox:
+                - /placeholder: Command
+                - text: dotnet
+            - generic:
+              - text: Arguments
+              - textbox:
+                - /placeholder: Arguments (space-separated)
+                - text: src/OrderHub.Mcp/bin/Debug/net8.0/OrderHub.Mcp.dll
+            - generic:
+              - button:
+                - img
+                - text: Environment Variables
+            - generic:
+              - button:
+                - img
+                - text: Server Entry
+              - button:
+                - img
+                - text: Servers File
+            - generic:
+              - button:
+                - img
+                - img
+                - text: Configuration
+            - generic:
+              - button:
+                - img
+                - text: Connect
+              - generic:
+                - generic: Disconnected
+        - generic:
+          - generic:
+            - combobox:
+              - generic: Dark
+              - img
+            - generic:
+              - link:
+                - /url: https://modelcontextprotocol.io/docs/tools/inspector
+                - img
+              - link:
+                - /url: https://modelcontextprotocol.io/docs/tools/debugging
+                - img
+              - link:
+                - /url: https://github.com/modelcontextprotocol/inspector
+                - img
+      - generic:
+        - generic:
+          - generic:
+            - paragraph: Connect to an MCP server to start inspecting
+            - generic:
+              - paragraph: Need to configure authentication?
+              - button: Open Auth Settings
+        - generic:
+          - generic:
+            - generic:
+              - generic:
+                - heading [level=2]: History
+                - paragraph: No history yet
+              - generic:
+                - heading [level=2]: Server Notifications
+                - paragraph: No notifications yet
+    - list
+  - listbox [ref=e87]:
+    - option "STDIO" [active] [selected] [ref=e88]:
+      - img [ref=e91]
+      - generic [ref=e93]: STDIO
+    - option "SSE" [ref=e94]:
+      - generic [ref=e96]: SSE
+    - option "Streamable HTTP" [ref=e97]:
+      - generic [ref=e99]: Streamable HTTP

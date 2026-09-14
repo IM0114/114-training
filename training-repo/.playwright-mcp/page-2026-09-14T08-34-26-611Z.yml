@@ -1,0 +1,108 @@
+- generic [ref=e2]:
+  - generic [ref=e3]:
+    - generic [ref=e4]:
+      - heading "MCP Inspector v0.14.0" [level=1] [ref=e7]
+      - generic [ref=e9]:
+        - generic [ref=e10]:
+          - text: Transport Type
+          - combobox "Transport Type" [ref=e11] [cursor=pointer]:
+            - generic: Streamable HTTP
+            - img [ref=e12]
+        - generic [ref=e14]:
+          - text: URL
+          - textbox "URL" [ref=e100]: http://localhost:3001
+        - button "Authentication" [ref=e101] [cursor=pointer]:
+          - img [ref=e102]
+          - text: Authentication
+        - generic [ref=e22]:
+          - button "Server Entry" [ref=e23] [cursor=pointer]:
+            - img [ref=e24]
+            - text: Server Entry
+          - button "Servers File" [ref=e27] [cursor=pointer]:
+            - img [ref=e28]
+            - text: Servers File
+        - button "Configuration" [ref=e32] [cursor=pointer]:
+          - img [ref=e33]
+          - img [ref=e35]
+          - text: Configuration
+        - generic [ref=e38]:
+          - generic [ref=e104]:
+            - button "Reconnect" [ref=e105] [cursor=pointer]:
+              - img [ref=e106]
+              - text: Reconnect
+            - button "Disconnect" [ref=e109] [cursor=pointer]:
+              - img [ref=e110]
+              - text: Disconnect
+          - generic [ref=e44]: Connected
+          - generic [ref=e118]:
+            - text: Logging Level
+            - combobox "Logging Level" [ref=e119] [cursor=pointer]:
+              - generic: debug
+              - img [ref=e120]
+      - generic [ref=e46]:
+        - combobox [ref=e47] [cursor=pointer]:
+          - generic: Dark
+          - img [ref=e48]
+        - generic [ref=e50]:
+          - link "Inspector Documentation" [ref=e51] [cursor=pointer]:
+            - /url: https://modelcontextprotocol.io/docs/tools/inspector
+            - img [ref=e52]
+          - link "Debugging Guide" [ref=e55] [cursor=pointer]:
+            - /url: https://modelcontextprotocol.io/docs/tools/debugging
+            - img [ref=e56]
+          - link "Report bugs or contribute on GitHub" [ref=e65] [cursor=pointer]:
+            - /url: https://github.com/modelcontextprotocol/inspector
+            - img [ref=e66]
+    - generic [ref=e69]:
+      - generic [ref=e122]:
+        - tablist [ref=e123]:
+          - tab "Resources" [selected] [ref=e124] [cursor=pointer]:
+            - img [ref=e125]
+            - text: Resources
+          - tab "Prompts" [ref=e129] [cursor=pointer]:
+            - img [ref=e130]
+            - text: Prompts
+          - tab "Tools" [ref=e132] [cursor=pointer]:
+            - img [ref=e133]
+            - text: Tools
+          - tab "Ping" [ref=e137] [cursor=pointer]:
+            - img [ref=e138]
+            - text: Ping
+          - tab "Sampling" [ref=e141] [cursor=pointer]:
+            - img [ref=e142]
+            - text: Sampling
+          - tab "Roots" [ref=e145] [cursor=pointer]:
+            - img [ref=e146]
+            - text: Roots
+          - tab "Auth" [ref=e151] [cursor=pointer]:
+            - img [ref=e152]
+            - text: Auth
+        - tabpanel "Resources" [ref=e157]:
+          - generic [ref=e158]:
+            - generic [ref=e159]:
+              - heading "Resources" [level=3] [ref=e161]
+              - generic [ref=e162]:
+                - button "List Resources" [ref=e163] [cursor=pointer]
+                - button "Clear" [disabled]
+            - generic [ref=e164]:
+              - heading "Resource Templates" [level=3] [ref=e166]
+              - generic [ref=e167]:
+                - button "List Templates" [ref=e168] [cursor=pointer]
+                - button "Clear" [disabled]
+            - generic [ref=e169]:
+              - heading "Select a resource or template" [level=3] [ref=e171]
+              - alert [ref=e173]:
+                - generic [ref=e174]: Select a resource or template from the list to view its contents
+      - generic [ref=e80]:
+        - generic [ref=e81]:
+          - heading "History" [level=2] [ref=e82]
+          - list [ref=e175]:
+            - listitem [ref=e176]:
+              - generic [ref=e177] [cursor=pointer]:
+                - generic [ref=e178]: 1. initialize
+                - generic [ref=e179]: ▶
+        - generic [ref=e84]:
+          - heading "Server Notifications" [level=2] [ref=e85]
+          - paragraph [ref=e86]: No notifications yet
+  - region "Notifications (F8)":
+    - list
