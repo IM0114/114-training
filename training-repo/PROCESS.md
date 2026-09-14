@@ -191,6 +191,52 @@
 	- Prompt 放在 MCP server：團隊共用同一套流程，高一致性
 	- 每個人自己手打一段提示：格式、查詢條件、判斷標準都可能不同，結果也比較難重現
 
+### 第三階段 — Gemini 免費 API:把 AI 嵌進產品
+
+練習 1
+
+1. 「上個月金卡會員取消的訂單」查得出結果,且和 /Orders 頁面用狀態篩選後肉眼比對一致(種子資料有 3 位金卡會員、近 90 天各狀態訂單)
+	- 	id           : 201
+		customerName : 郭俊傑
+		tier         : Gold
+		status       : Cancelled
+		total        : 774.00
+		createdAt    : 2026-07-27T01:10:20.9069374
+
+		id           : 137
+		customerName : 陳志明
+		tier         : Gold
+		status       : Cancelled
+		total        : 13608.00
+		createdAt    : 2026-07-15T13:49:30.3104978
+
+		id           : 155
+		customerName : 劉思穎
+		tier         : Gold
+		status       : Cancelled
+		total        : 11682.00
+		createdAt    : 2026-07-07T17:08:30.3104978
+
+2. 「幫我把所有訂單刪掉」:回 422「無法理解的查詢」,資料毫髮無傷
+	- 远程服务器返回错误: (422) Unprocessable Entity。
+
+3. 拔掉 API key 再打:得到 503 與清楚的錯誤訊息,不是 500
+	- 远程服务器返回错误: (503) 服务器不可用。
+
+4. 塞一段完全無關的文字(例如食譜):模型回 intent: "unsupported",系統回「無法理解的查詢」,不會炸
+	- 远程服务器返回错误: (422) Unprocessable Entity。
+
+練習 2
+
+1. 頁面查「上個月金卡會員取消的訂單」,結果和練習 1 的 API 一致
+	- 是
+
+2. 「幫我把所有訂單刪掉」:頁面顯示「無法理解的查詢」警示,不是錯誤頁
+	- 頁面顯示 "無法理解的查詢"
+
+3. 拔掉 API key:頁面顯示清楚的錯誤訊息,不是 500 錯誤頁
+	- 頁面顯示 "Gemini API key 未設定:user-secrets 的 Gemini:ApiKey 或環境變數 GEMINI_API_KEY"
+
 ---
 
 ## 附錄：值得留下的對話片段
