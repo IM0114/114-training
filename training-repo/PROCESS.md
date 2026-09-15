@@ -237,6 +237,54 @@
 3. 拔掉 API key:頁面顯示清楚的錯誤訊息,不是 500 錯誤頁
 	- 頁面顯示 "Gemini API key 未設定:user-secrets 的 Gemini:ApiKey 或環境變數 GEMINI_API_KEY"
 
+### 第四階段 — n8n 自動化:把人抽離流程
+
+練習 0
+
+1. npx @modelcontextprotocol/inspector,Transport 選 Streamable HTTP、URL 填 http://localhost:3001:四個工具、resource、prompt 都列得出來
+	- 是的
+
+2. 不帶 --http 照舊走 stdio:Claude Code /mcp 裡的 orderhub 一切正常
+	- 是的
+
+練習 1
+
+1. 回應含你送的內容 + 時間戳
+	- headers       : @{user-agent=Mozilla/5.0 (Windows NT; Windows NT 10.0; zh-CN) WindowsPowerShell/5.1.17763.9020; content-type=application/json; host=localhost:5678; content-length=16; expe
+                ct=100-continue; connection=Keep-Alive}
+	params        :
+	query         :
+	body          : @{text=hello}
+	webhookUrl    : http://localhost:5678/webhook-test/hello-114
+	executionMode : test
+	receivedAt    : expression 2026-09-14T04:54:33.489-04:00
+
+2. 理解 Test URL vs Production URL 的差別:Test 要在編輯器按 Listen 才活(120 秒、一發即停),Activate workflow 後才有常駐的 Production URL,執行紀錄看 Executions 分頁
+	- Test URL = 編輯器測流程用，短暫、一次性
+	- Production URL = workflow 啟用後正式給外部呼叫，常駐
+
+練習 2
+
+1. Execute workflow:開出 GitHub issue、收到通知;日報數字和 /Orders 頁面篩「已取消」肉眼比對一致
+	- 成功收到通知並與 /Orders 頁面一致
+
+2. 把查詢文字改成查不到東西的條件(例如「昨天取消的訂單」):存進n8n Datatable,不開 issue
+	- Datatable 寫入 “本日無退單”
+
+3. 如果「查什麼、怎麼查」也交給 AI Agent 自由發揮,會失去什麼?
+	- 會失去活動 3 建好的白名單防線，查詢範圍就會變得不可控
+	- 降低可測試性，如果查詢策略由 AI 即時生成，查詢條件、判斷標準都可能不同，結果也比較難重現
+	- 影響日報數字的可信度，數據應該來自系統查詢結果，而非來自 AI 推測
+
+練習 3
+
+1. 執行紀錄裡看得到 agent 對退單呼叫了 get_order,日報引用了真實品項與金額
+	- 是的，日報詳細顯示了該訂單的明細
+
+2. 對照練習 2:同一批退單,有深挖 vs 沒深挖的日報差異
+	- 有深挖的日報會顯示取消訂單的資料，如：客戶名稱，會員等級，訂單總金額，訂單品項，訂單總數量，訂單明細 等等
+	- 無深挖的日報只顯示 客戶名稱，會員等級，訂單總金額，和 訂單總數量
+
 ---
 
 ## 附錄：值得留下的對話片段
